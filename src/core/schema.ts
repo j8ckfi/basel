@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
-export const ConfidenceLevel = z.enum(['high', 'medium', 'low']);
-export type ConfidenceLevel = z.infer<typeof ConfidenceLevel>;
+export const EntryStatus = z.enum(['open', 'closed']);
+export type EntryStatus = z.infer<typeof EntryStatus>;
 
 const DateOrString = z.union([z.date(), z.string()]).transform(val =>
     val instanceof Date ? val.toISOString().split('T')[0] : val
@@ -12,7 +12,7 @@ export const EntryFrontmatter = z.object({
     tags: z.array(z.string()).default([]),
     updated: DateOrString.optional(),
     source: z.string().url().optional(),
-    confidence: ConfidenceLevel.default('high'),
+    status: EntryStatus.default('closed'),
     related: z.array(z.string()).default([]),
 });
 export type EntryFrontmatter = z.infer<typeof EntryFrontmatter>;
@@ -23,7 +23,7 @@ export const Entry = z.object({
     question: z.string(),
     tags: z.array(z.string()),
     updated: z.string().optional(),
-    confidence: ConfidenceLevel,
+    status: EntryStatus,
     related: z.array(z.string()),
     content: z.string(),
 });
@@ -35,7 +35,7 @@ export const ManifestEntry = z.object({
     question: z.string(),
     tags: z.array(z.string()),
     updated: z.string().optional(),
-    confidence: ConfidenceLevel,
+    status: EntryStatus,
     related: z.array(z.string()),
 });
 export type ManifestEntry = z.infer<typeof ManifestEntry>;

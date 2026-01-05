@@ -25,7 +25,7 @@ export async function parseEntry(filePath: string): Promise<Entry> {
         question: frontmatter.question,
         tags: frontmatter.tags,
         updated: frontmatter.updated,
-        confidence: frontmatter.confidence,
+        status: frontmatter.status,
         related: frontmatter.related,
         content: body.trim(),
     };
@@ -57,7 +57,7 @@ export function formatEntry(entry: Entry): string {
     };
 
     if (entry.updated) frontmatter.updated = entry.updated;
-    if (entry.confidence !== 'high') frontmatter.confidence = entry.confidence;
+    if (entry.status === 'open') frontmatter.status = 'open';
     if (entry.related.length > 0) frontmatter.related = entry.related;
 
     return matter.stringify(entry.content, frontmatter);

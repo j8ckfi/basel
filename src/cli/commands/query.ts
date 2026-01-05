@@ -48,7 +48,7 @@ export async function query(cwd: string, queryText: string, options: QueryOption
             id: r.entry.id,
             question: r.entry.question,
             tags: r.entry.tags,
-            confidence: r.entry.confidence,
+            status: r.entry.status,
             content: r.entry.content,
             score: 1 - r.score,
         })), null, 2));

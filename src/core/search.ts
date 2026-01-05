@@ -49,10 +49,10 @@ export function search(
 
 export function formatSearchResult(result: SearchResult): string {
     const { entry, score } = result;
-    const confidence = entry.confidence === 'high' ? '' : ` [${entry.confidence}]`;
+    const status = entry.status === 'open' ? ' ⚠️ OPEN' : '';
     const tags = entry.tags.length > 0 ? ` (${entry.tags.join(', ')})` : '';
 
-    return `## ${entry.question}${confidence}${tags}
+    return `## ${entry.question}${status}${tags}
 
 ${entry.content}
 

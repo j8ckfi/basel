@@ -13,22 +13,23 @@ function slugify(text: string): string {
         .slice(0, 50);
 }
 
-function generateEntryContent(question: string, tags: string[]): string {
+function generateEntryContent(question: string, tags: string[], isOpen: boolean): string {
     const today = new Date().toISOString().split('T')[0];
+    const statusLine = isOpen ? 'status: open' : '';
+    const statusYaml = statusLine ? `\n${statusLine}` : '';
     return `---
 question: "${question}"
 tags: [${tags.join(', ')}]
-updated: ${today}
-confidence: high
+updated: ${today}${statusYaml}
 ---
 
 ## Context
 
-[Describe when this question applies]
+${isOpen ? '[Describe the problem - another agent may solve this]' : '[Describe when this question applies]'}
 
 ## Answer
 
-[Provide the solution]
+${isOpen ? '[OPEN - waiting for solution]' : '[Provide the solution]'}
 
 ## Gotchas
 
@@ -39,6 +40,7 @@ confidence: high
 export interface AddOptions {
     fromFile?: string;
     category?: string;
+    open?: boolean;
 }
 
 export async function add(cwd: string, questionText: string | undefined, options: AddOptions): Promise<void> {
@@ -66,6 +68,7 @@ export async function add(cwd: string, questionText: string | undefined, options
     let question = questionText;
     let tags: string[] = [];
     let category = options.category || 'project';
+    let isOpen = options.open || false;
 
     if (!question) {
         const answers = await inquirer.prompt([
@@ -86,10 +89,17 @@ export async function add(cwd: string, questionText: string | undefined, options
                 message: 'Category:',
                 default: 'project',
             },
+            {
+                type: 'confirm',
+                name: 'open',
+                message: 'Mark as open question?',
+                default: false,
+            },
         ]);
         question = answers.question;
         tags = answers.tags ? answers.tags.split(',').map((t: string) => t.trim()) : [];
         category = answers.category;
+        isOpen = answers.open;
     }
 
     const slug = slugify(question!);
@@ -97,9 +107,13 @@ export async function add(cwd: string, questionText: string | undefined, options
     await fs.mkdir(destDir, { recursive: true });
     const destPath = path.join(destDir, `${slug}.md`);
 
-    const content = generateEntryContent(question!, tags);
+    const content = generateEntryContent(question!, tags, isOpen);
     await fs.writeFile(destPath, content);
 
     console.log(chalk.green('✓ Created'), chalk.cyan(destPath));
-    console.log(chalk.dim('  Edit the file to add context, answer, and gotchas'));
+    if (isOpen) {
+        console.log(chalk.yellow('  Marked as OPEN - other agents can solve this'));
+    } else {
+        console.log(chalk.dim('  Edit the file to add context, answer, and gotchas'));
+    }
 }

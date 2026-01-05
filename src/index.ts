@@ -8,13 +8,14 @@ import { build } from './cli/commands/build.js';
 import { validate } from './cli/commands/validate.js';
 import { serve } from './cli/commands/serve.js';
 import { pack } from './cli/commands/pack.js';
+import { open } from './cli/commands/open.js';
 
 const program = new Command();
 
 program
     .name('basel')
-    .description('Q&A knowledge indexes for AI coding agents')
-    .version('0.1.0');
+    .description('Multi-agent knowledge base for AI coding agents')
+    .version('1.1.0');
 
 program
     .command('init')
@@ -28,6 +29,7 @@ program
     .description('Create a new entry')
     .option('--from-file <path>', 'Import existing markdown file')
     .option('-c, --category <name>', 'Category directory', 'project')
+    .option('--open', 'Mark as an open question for other agents to solve')
     .action(async (question, options) => {
         await add(process.cwd(), question, options);
     });
@@ -44,6 +46,13 @@ program
             limit: parseInt(options.limit, 10),
             format: options.format,
         });
+    });
+
+program
+    .command('open')
+    .description('List all open questions awaiting solutions')
+    .action(async () => {
+        await open(process.cwd());
     });
 
 program

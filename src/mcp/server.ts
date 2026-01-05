@@ -14,7 +14,7 @@ const BASEL_DIR = '.basel';
 
 export async function startMcpServer(cwd: string): Promise<void> {
     const server = new Server(
-        { name: 'basel', version: '1.0.0' },
+        { name: 'basel', version: '1.1.0' },
         { capabilities: { tools: {} } }
     );
 
@@ -63,37 +63,66 @@ export async function startMcpServer(cwd: string): Promise<void> {
                     required: ['query'],
                 },
             },
+            {
+                name: 'list_open_questions',
+                description: "List all open questions in the Basel knowledge index that need solutions. Use this to find problems you can help solve. When you solve one, update its status to 'closed'.",
+                inputSchema: {
+                    type: 'object',
+                    properties: {},
+                },
+            },
         ],
     }));
 
     server.setRequestHandler(CallToolRequestSchema, async (request) => {
-        if (request.params.name !== 'search_project_index') {
-            return { content: [{ type: 'text', text: `Unknown tool: ${request.params.name}` }] };
-        }
-
         if (!searchIndex) {
             await loadIndex();
+        }
+
+        if (request.params.name === 'list_open_questions') {
+            if (entries.length === 0) {
+                return { content: [{ type: 'text', text: 'No Basel index found in this project. Run `basel init` to create one.' }] };
+            }
+
+            const openEntries = entries.filter(e => e.status === 'open');
+
+            if (openEntries.length === 0) {
+                return { content: [{ type: 'text', text: 'No open questions. All problems are solved!' }] };
+            }
+
+            const formatted = openEntries.map(e => {
+                const tags = e.tags.length > 0 ? ` [${e.tags.join(', ')}]` : '';
+                return `## ${e.question}${tags}\n\nPath: ${e.path}\n\n${e.content}`;
+            }).join('\n\n---\n\n');
+
+            return { content: [{ type: 'text', text: `${openEntries.length} open question(s):\n\n${formatted}` }] };
+        }
+
+        if (request.params.name === 'search_project_index') {
             if (!searchIndex) {
                 return { content: [{ type: 'text', text: 'No Basel index found in this project. Run `basel init` to create one.' }] };
             }
+
+            const args = request.params.arguments as { query: string; tags?: string[]; limit?: number };
+            const results = search(searchIndex, args.query, {
+                tags: args.tags,
+                limit: args.limit,
+            });
+
+            if (results.length === 0) {
+                return { content: [{ type: 'text', text: 'No matching entries found.' }] };
+            }
+
+            const formatted = results.map(r => {
+                const tags = r.entry.tags.length > 0 ? ` [${r.entry.tags.join(', ')}]` : '';
+                const status = r.entry.status === 'open' ? ' ⚠️ OPEN' : '';
+                return `## ${r.entry.question}${tags}${status}\n\n${r.entry.content}`;
+            }).join('\n\n---\n\n');
+
+            return { content: [{ type: 'text', text: formatted }] };
         }
 
-        const args = request.params.arguments as { query: string; tags?: string[]; limit?: number };
-        const results = search(searchIndex, args.query, {
-            tags: args.tags,
-            limit: args.limit,
-        });
-
-        if (results.length === 0) {
-            return { content: [{ type: 'text', text: 'No matching entries found.' }] };
-        }
-
-        const formatted = results.map(r => {
-            const tags = r.entry.tags.length > 0 ? ` [${r.entry.tags.join(', ')}]` : '';
-            return `## ${r.entry.question}${tags}\n\n${r.entry.content}`;
-        }).join('\n\n---\n\n');
-
-        return { content: [{ type: 'text', text: formatted }] };
+        return { content: [{ type: 'text', text: `Unknown tool: ${request.params.name}` }] };
     });
 
     const transport = new StdioServerTransport();

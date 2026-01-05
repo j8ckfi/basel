@@ -26,7 +26,7 @@ export function entryToManifestEntry(entry: Entry, baselDir: string): ManifestEn
         question: entry.question,
         tags: entry.tags,
         updated: entry.updated,
-        confidence: entry.confidence,
+        status: entry.status,
         related: entry.related,
     };
 }
