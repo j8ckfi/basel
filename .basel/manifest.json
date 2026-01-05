@@ -11,7 +11,7 @@
         "commands"
       ],
       "updated": "2026-01-04",
-      "confidence": "high",
+      "status": "closed",
       "related": []
     },
     {
@@ -24,7 +24,7 @@
         "frontmatter"
       ],
       "updated": "2026-01-04",
-      "confidence": "high",
+      "status": "closed",
       "related": [
         "core-schema-validation"
       ]
@@ -39,7 +39,7 @@
         "build"
       ],
       "updated": "2026-01-04",
-      "confidence": "high",
+      "status": "closed",
       "related": []
     },
     {
@@ -53,7 +53,7 @@
         "zod"
       ],
       "updated": "2026-01-04",
-      "confidence": "high",
+      "status": "closed",
       "related": [
         "core-entry-parsing"
       ]
@@ -68,7 +68,16 @@
         "fuse"
       ],
       "updated": "2026-01-04",
-      "confidence": "high",
+      "status": "closed",
+      "related": []
+    },
+    {
+      "id": "core-what-s-the-best-approach-for-embedding-based-seman",
+      "path": "core/what-s-the-best-approach-for-embedding-based-seman.md",
+      "question": "What's the best approach for embedding-based semantic search?",
+      "tags": [],
+      "updated": "2026-01-05",
+      "status": "open",
       "related": []
     },
     {
@@ -81,7 +90,29 @@
         "development"
       ],
       "updated": "2026-01-04",
-      "confidence": "high",
+      "status": "closed",
+      "related": []
+    },
+    {
+      "id": "mcp-how-should-we-handle-http-transport-for-mcp",
+      "path": "mcp/how-should-we-handle-http-transport-for-mcp.md",
+      "question": "How should we handle HTTP transport for MCP?",
+      "tags": [
+        "mcp",
+        "http",
+        "transport"
+      ],
+      "updated": "2026-01-05",
+      "status": "closed",
+      "related": []
+    },
+    {
+      "id": "project-should-we-auto-generate-entries-from-github-issues",
+      "path": "project/should-we-auto-generate-entries-from-github-issues.md",
+      "question": "Should we auto-generate entries from GitHub Issues?",
+      "tags": [],
+      "updated": "2026-01-05",
+      "status": "open",
       "related": []
     },
     {
@@ -95,7 +126,7 @@
         "testing"
       ],
       "updated": "2026-01-04",
-      "confidence": "high",
+      "status": "closed",
       "related": []
     }
   ]
