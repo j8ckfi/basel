@@ -9,6 +9,7 @@ import { validate } from './cli/commands/validate.js';
 import { serve } from './cli/commands/serve.js';
 import { pack } from './cli/commands/pack.js';
 import { open } from './cli/commands/open.js';
+import { importFromRepo } from './cli/commands/import.js';
 
 const program = new Command();
 
@@ -82,6 +83,13 @@ program
     .description('Manage starter packs (list, add)')
     .action(async (action, name) => {
         await pack(process.cwd(), action, name);
+    });
+
+program
+    .command('import <repo-url>')
+    .description('Import entries from a GitHub repository with .basel/')
+    .action(async (repoUrl) => {
+        await importFromRepo(process.cwd(), repoUrl);
     });
 
 program.parse();
