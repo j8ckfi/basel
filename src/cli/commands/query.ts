@@ -28,11 +28,15 @@ export async function query(cwd: string, queryText: string, options: QueryOption
         return;
     }
 
-    const entries = await Promise.all(
-        entryPaths
-            .filter(p => !path.basename(p).startsWith('_'))
-            .map(p => parseEntry(p))
-    );
+    const entries = [];
+    for (const p of entryPaths.filter(ep => !path.basename(ep).startsWith('_'))) {
+        try {
+            entries.push(await parseEntry(p));
+        } catch (e) {
+            console.log(chalk.yellow(`Warning: Skipping malformed entry: ${p}`));
+            console.log(chalk.dim(`  ${e instanceof Error ? e.message : 'Parse error'}`));
+        }
+    }
 
     const index = createSearchIndex(entries);
     const tags = options.tags ? options.tags.split(',').map(t => t.trim()) : undefined;

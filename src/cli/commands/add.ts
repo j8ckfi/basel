@@ -15,12 +15,12 @@ function slugify(text: string): string {
 
 function generateEntryContent(question: string, tags: string[], isOpen: boolean): string {
     const today = new Date().toISOString().split('T')[0];
-    const statusLine = isOpen ? 'status: open' : '';
-    const statusYaml = statusLine ? `\n${statusLine}` : '';
+    const status = isOpen ? 'open' : 'closed';
     return `---
 question: "${question}"
 tags: [${tags.join(', ')}]
-updated: ${today}${statusYaml}
+updated: ${today}
+status: ${status}
 ---
 
 ## Context
@@ -45,6 +45,12 @@ export interface AddOptions {
 
 export async function add(cwd: string, questionText: string | undefined, options: AddOptions): Promise<void> {
     const baselDir = path.join(cwd, BASEL_DIR);
+
+    // BUG #3: Validate empty question string early
+    if (questionText !== undefined && questionText.trim() === '') {
+        console.log(chalk.red('Question cannot be empty.'));
+        return;
+    }
 
     try {
         await fs.access(baselDir);
@@ -106,6 +112,23 @@ export async function add(cwd: string, questionText: string | undefined, options
     const destDir = path.join(baselDir, category);
     await fs.mkdir(destDir, { recursive: true });
     const destPath = path.join(destDir, `${slug}.md`);
+
+    // BUG #2: Check if file already exists
+    try {
+        await fs.access(destPath);
+        const { overwrite } = await inquirer.prompt([{
+            type: 'confirm',
+            name: 'overwrite',
+            message: `File already exists: ${destPath}. Overwrite?`,
+            default: false,
+        }]);
+        if (!overwrite) {
+            console.log(chalk.yellow('Aborted. File not modified.'));
+            return;
+        }
+    } catch {
+        // File doesn't exist, proceed normally
+    }
 
     const content = generateEntryContent(question!, tags, isOpen);
     await fs.writeFile(destPath, content);

@@ -52,9 +52,9 @@ export async function listPacks(): Promise<void> {
             console.log(`  ${chalk.green(pack.name)} - ${pack.description} (${pack.entries} entries)`);
         }
     } catch (e) {
-        console.log(chalk.yellow('Could not fetch registry. Check your internet connection.'));
-        console.log(chalk.dim('\nAvailable packs (offline list):'));
-        console.log(chalk.dim('  swift, python, typescript, react, rust, go'));
+        console.log(chalk.yellow('Pack registry is not yet available.'));
+        console.log(chalk.dim('The community pack registry is coming soon.'));
+        console.log(chalk.dim('\\nFor now, manually add entries with: basel add'));
     }
 }
 
