@@ -68,7 +68,6 @@ For files in `src/analytics/`, always use `knex.raw()` instead of the query buil
 ```
 
 ### 4. Tribal Knowledge
-The stuff that lives in Slack threads.
 
 ```yaml
 ---
