@@ -2,7 +2,7 @@
 question: "How do I add a new MCP tool to the server?"
 tags: [mcp, server, development]
 updated: 2026-01-04
-confidence: high
+status: closed
 ---
 
 ## Context

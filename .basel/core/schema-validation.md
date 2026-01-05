@@ -2,7 +2,7 @@
 question: "How do I modify the Zod schemas for entry validation?"
 tags: [core, schema, validation, zod]
 updated: 2026-01-04
-confidence: high
+status: closed
 related: [core-entry-parsing]
 ---
 
@@ -20,7 +20,7 @@ export const EntryFrontmatter = z.object({
   tags: z.array(z.string()).default([]),
   updated: DateOrString.optional(),
   source: z.string().url().optional(),
-  confidence: ConfidenceLevel.default('high'),
+  status: EntryStatus.default('closed'),
   related: z.array(z.string()).default([]),
 });
 ```

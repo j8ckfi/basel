@@ -14,7 +14,7 @@ const BASEL_DIR = '.basel';
 
 export async function startMcpServer(cwd: string): Promise<void> {
     const server = new Server(
-        { name: 'basel', version: '1.1.0' },
+        { name: 'basel', version: '1.1.1' },
         { capabilities: { tools: {} } }
     );
 

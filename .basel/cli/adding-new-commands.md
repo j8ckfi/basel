@@ -2,7 +2,7 @@
 question: "How do I add a new CLI command to Basel?"
 tags: [cli, development, commands]
 updated: 2026-01-04
-confidence: high
+status: closed
 ---
 
 ## Context

@@ -2,7 +2,7 @@
 question: "How does the search algorithm work?"
 tags: [core, search, fuse]
 updated: 2026-01-04
-confidence: high
+status: closed
 ---
 
 ## Context

@@ -10,7 +10,7 @@ registry: https://raw.githubusercontent.com/basel-registry/main
 const EXAMPLE_ENTRY = `---
 question: "Example: How do I use this feature?"
 tags: [example]
-confidence: high
+status: closed
 ---
 
 ## Context

@@ -1,6 +1,6 @@
 {
-  "name": "basel",
-  "version": "0.1.0",
+  "name": "basel-kb",
+  "version": "1.1.1",
   "description": "Q&A knowledge indexes for AI coding agents",
   "type": "module",
   "bin": {
@@ -12,11 +12,18 @@
     "test": "vitest",
     "lint": "eslint src"
   },
-  "keywords": ["ai", "agents", "knowledge", "mcp", "cli"],
+  "keywords": [
+    "ai",
+    "agents",
+    "knowledge",
+    "mcp",
+    "cli"
+  ],
   "author": "Jack",
   "license": "MIT",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.0",
+    "basel-kb": "^1.1.1",
     "chalk": "^5.3.0",
     "commander": "^12.0.0",
     "fuse.js": "^7.0.0",

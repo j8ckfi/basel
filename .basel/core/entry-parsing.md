@@ -2,7 +2,7 @@
 question: "How does the entry parsing work?"
 tags: [core, parsing, frontmatter]
 updated: 2026-01-04
-confidence: high
+status: closed
 related: [core-schema-validation]
 ---
 
@@ -25,7 +25,7 @@ The frontmatter schema expects:
 - `question` (required): The Q&A question
 - `tags`: Array of strings for filtering
 - `updated`: Date string (auto-coerced from Date objects)
-- `confidence`: `high | medium | low`
+- `status`: Whether the question is open or closed
 - `related`: Array of entry IDs for linking
 
 Entry IDs are generated from the path: `{category}-{filename}` (e.g., `cli-adding-new-commands`).

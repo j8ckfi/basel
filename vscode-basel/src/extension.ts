@@ -175,7 +175,7 @@ async function handleInit() {
             `---
 question: "Example: How do I use this feature?"
 tags: [example]
-confidence: high
+status: closed
 ---
 
 ## Context
@@ -223,7 +223,7 @@ async function handleAdd() {
 question: "${question}"
 tags: []
 updated: ${today}
-confidence: high
+status: closed
 ---
 
 ## Context

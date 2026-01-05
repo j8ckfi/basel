@@ -2,7 +2,7 @@
 question: "How do I test the VS Code extension locally?"
 tags: [vscode, extension, development, testing]
 updated: 2026-01-04
-confidence: high
+status: closed
 ---
 
 ## Context
