@@ -4,7 +4,7 @@
 
 # basel
 
-your codebase (probably) isn't perfect. your agents don't need it to be — they need to understand it.
+your codebase (probably) isn't perfect. your agents don't need it to be, they just need to understand it.
 
 ---
 
