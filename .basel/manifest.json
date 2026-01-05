@@ -1,0 +1,102 @@
+{
+  "version": "1.0",
+  "entries": [
+    {
+      "id": "cli-adding-new-commands",
+      "path": "cli/adding-new-commands.md",
+      "question": "How do I add a new CLI command to Basel?",
+      "tags": [
+        "cli",
+        "development",
+        "commands"
+      ],
+      "updated": "2026-01-04",
+      "confidence": "high",
+      "related": []
+    },
+    {
+      "id": "core-entry-parsing",
+      "path": "core/entry-parsing.md",
+      "question": "How does the entry parsing work?",
+      "tags": [
+        "core",
+        "parsing",
+        "frontmatter"
+      ],
+      "updated": "2026-01-04",
+      "confidence": "high",
+      "related": [
+        "core-schema-validation"
+      ]
+    },
+    {
+      "id": "core-manifest-structure",
+      "path": "core/manifest-structure.md",
+      "question": "What is the manifest.json and how is it built?",
+      "tags": [
+        "core",
+        "manifest",
+        "build"
+      ],
+      "updated": "2026-01-04",
+      "confidence": "high",
+      "related": []
+    },
+    {
+      "id": "core-schema-validation",
+      "path": "core/schema-validation.md",
+      "question": "How do I modify the Zod schemas for entry validation?",
+      "tags": [
+        "core",
+        "schema",
+        "validation",
+        "zod"
+      ],
+      "updated": "2026-01-04",
+      "confidence": "high",
+      "related": [
+        "core-entry-parsing"
+      ]
+    },
+    {
+      "id": "core-search-algorithm",
+      "path": "core/search-algorithm.md",
+      "question": "How does the search algorithm work?",
+      "tags": [
+        "core",
+        "search",
+        "fuse"
+      ],
+      "updated": "2026-01-04",
+      "confidence": "high",
+      "related": []
+    },
+    {
+      "id": "mcp-adding-tools",
+      "path": "mcp/adding-tools.md",
+      "question": "How do I add a new MCP tool to the server?",
+      "tags": [
+        "mcp",
+        "server",
+        "development"
+      ],
+      "updated": "2026-01-04",
+      "confidence": "high",
+      "related": []
+    },
+    {
+      "id": "vscode-testing-extension",
+      "path": "vscode/testing-extension.md",
+      "question": "How do I test the VS Code extension locally?",
+      "tags": [
+        "vscode",
+        "extension",
+        "development",
+        "testing"
+      ],
+      "updated": "2026-01-04",
+      "confidence": "high",
+      "related": []
+    }
+  ]
+}

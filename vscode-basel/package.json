@@ -1,0 +1,54 @@
+{
+    "name": "basel",
+    "displayName": "Basel",
+    "description": "Q&A knowledge index for AI coding agents",
+    "version": "0.1.0",
+    "publisher": "basel",
+    "engines": {
+        "vscode": "^1.85.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "workspaceContains:.basel"
+    ],
+    "main": "./out/extension.js",
+    "contributes": {
+        "commands": [
+            {
+                "command": "basel.search",
+                "title": "Basel: Search Knowledge Index"
+            },
+            {
+                "command": "basel.init",
+                "title": "Basel: Initialize Index"
+            },
+            {
+                "command": "basel.add",
+                "title": "Basel: Add Entry"
+            }
+        ],
+        "keybindings": [
+            {
+                "command": "basel.search",
+                "key": "ctrl+shift+k",
+                "mac": "cmd+shift+k"
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./"
+    },
+    "devDependencies": {
+        "@types/node": "^20.11.0",
+        "@types/vscode": "^1.85.0",
+        "typescript": "^5.3.0"
+    },
+    "dependencies": {
+        "fuse.js": "^7.0.0",
+        "gray-matter": "^4.0.3"
+    }
+}

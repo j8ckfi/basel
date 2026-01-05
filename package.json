@@ -1,0 +1,36 @@
+{
+  "name": "basel",
+  "version": "0.1.0",
+  "description": "Q&A knowledge indexes for AI coding agents",
+  "type": "module",
+  "bin": {
+    "basel": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest",
+    "lint": "eslint src"
+  },
+  "keywords": ["ai", "agents", "knowledge", "mcp", "cli"],
+  "author": "Jack",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "chalk": "^5.3.0",
+    "commander": "^12.0.0",
+    "fuse.js": "^7.0.0",
+    "gray-matter": "^4.0.3",
+    "inquirer": "^9.2.0",
+    "zod": "^3.22.0"
+  },
+  "devDependencies": {
+    "@types/inquirer": "^9.0.7",
+    "@types/node": "^20.11.0",
+    "typescript": "^5.3.0",
+    "vitest": "^1.2.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
